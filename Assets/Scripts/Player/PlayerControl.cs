@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,6 +11,8 @@ public class PlayerControl : MonoBehaviour
     private float _moveX;
     private float _moveY;
 
+    [SerializeField]
+    private PCControl _interactablePC = null;
     [SerializeField]
     private DogControl _dog;
     [SerializeField]
@@ -32,13 +32,22 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Direct meeting
+        //Interact
         if (Input.GetKeyDown(KeyCode.E))
         {
-            DirectMeeting();
+	    //DirectMeeting();
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
+
+            if (_interactablePC != null)
+            {
+                if (!_interactablePC.IsHacked())
+                    _interactablePC.Hacked();
+            }
         }
 
-        //Right click to queue for dog to deslack
+	//Right click to queue for dog to deslack
         if (Input.GetMouseButtonDown(1))
         {
             DogEnqueue();
@@ -61,36 +70,52 @@ public class PlayerControl : MonoBehaviour
         _move.Walk(_moveX, _moveY);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.CompareTag("Worker"))
-            _interactableWorker = collision.transform.GetComponent<WorkerControl>();
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (_interactableWorker)
-            if (collision.transform == _interactableWorker.transform)
-                _interactableWorker = null;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Dog"))
-        {
-            _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
-            _interactableWorker.Highlight(Color.white, true);
-        }    
+        switch (collision.gameObject.tag) {
+            case "Worker":
+                _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+                break;
+
+            case "PC":
+                _interactablePC = collision.gameObject.GetComponent<PCControl>();
+                break;
+
+            default:
+                break;
+
+        }
+	//if (collision.transform.CompareTag("Dog"))
+        //{
+        //    _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
+        //    _interactableWorker.Highlight(Color.white, true);
+        //}    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_interactableWorker)
-            if (collision.transform.parent == _interactableWorker.transform)
-            {
-                _interactableWorker.Highlight(false);
-                _interactableWorker = null;
-            }
+	switch (collision.gameObject.tag)
+        {
+            case "Worker":
+                if (_interactableWorker)
+                    if (collision.gameObject == _interactableWorker.gameObject)
+                        _interactableWorker = null;
+                break;
+
+            case "PC":
+                if (_interactablePC)
+                    if (collision.gameObject == _interactablePC.gameObject)
+                        _interactablePC = null;
+                break;
+
+            default:
+                break;
+        //if (_interactableWorker)
+        //    if (collision.transform.parent == _interactableWorker.transform)
+        //    {
+        //        _interactableWorker.Highlight(false);
+        //        _interactableWorker = null;
+        //    }
     }
 
     private void DirectMeeting()
