@@ -1,0 +1,1 @@
+-Movement (diagonal movement isn't faster)
