@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(UnitMovement))]
 public class PlayerControl : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     private float _moveY;
 
     [SerializeField]
-    private WorkerControl _interactableWorker;
+    private WorkerControl _interactableWorker = null;
 
     //Components
     private UnitMovement _move;
@@ -29,8 +31,9 @@ public class PlayerControl : MonoBehaviour
         //Direct meeting
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_interactableWorker.IsSlacking())
-                _interactableWorker.Deslack();
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
         }
 
         _moveX = Input.GetAxisRaw("Horizontal");
