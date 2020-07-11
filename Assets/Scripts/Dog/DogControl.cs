@@ -11,6 +11,7 @@ public class DogControl : MonoBehaviour
     private List<Transform> _deslackQueue = new List<Transform>();
 
     //Component
+    private WorkerControl _slack;
     private UnitMovement _move;
 
     // Start is called before the first frame update
@@ -22,7 +23,8 @@ public class DogControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enforce();
+        if (!_slack.IsSlacking())
+            enforce();
     }
 
     private void FixedUpdate()
