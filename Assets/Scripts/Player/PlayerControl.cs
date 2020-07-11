@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     private float _moveY;
 
     [SerializeField]
+    private DogControl _dog;
     private WorkerControl _interactableWorker = null;
 
     //Components
@@ -31,9 +34,13 @@ public class PlayerControl : MonoBehaviour
         //Direct meeting
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_interactableWorker != null)
-                if (_interactableWorker.IsSlacking())
-                    _interactableWorker.Deslack();
+            DirectMeeting();
+        }
+
+        //Right click to queue for dog to deslack
+        if (Input.GetMouseButtonDown(1))
+        {
+            DogEnqueue();
         }
 
         _moveX = Input.GetAxisRaw("Horizontal");
@@ -55,7 +62,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Worker")
+        if (collision.gameObject.CompareTag("Worker"))
             _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
     }
 
@@ -64,5 +71,26 @@ public class PlayerControl : MonoBehaviour
         if (_interactableWorker)
             if (collision.gameObject == _interactableWorker.gameObject)
                 _interactableWorker = null;
+    }
+
+    private void DirectMeeting()
+    {
+        if (_interactableWorker != null)
+            if (_interactableWorker.IsSlacking())
+                _interactableWorker.Deslack();
+    }
+
+    private void DogEnqueue()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Worker"));
+
+        if (hit.collider != null)
+        {
+            if (hit.transform.CompareTag("Worker"))
+            {
+                //Enqueue dog
+                _dog.EnqueueDeslack(hit.transform.gameObject);
+            }
+        }
     }
 }
