@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA.Input;
 
 [RequireComponent(typeof(Animator))]
 public class WorkerControl : MonoBehaviour
 {
-    private bool _isSlacking = false;
+    private bool _isSlacking = true;
     private bool _slackable = true;
 
     //Components
@@ -24,6 +25,7 @@ public class WorkerControl : MonoBehaviour
     private void Start()
     {
         _anim = GetComponent<Animator>();
+        _anim.SetBool("isSlacking", true);
     }
 
     public void Slack()

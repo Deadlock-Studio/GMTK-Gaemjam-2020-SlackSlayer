@@ -9,6 +9,9 @@ public class PlayerControl : MonoBehaviour
     private float _moveX;
     private float _moveY;
 
+    [SerializeField]
+    private WorkerControl _interactableWorker;
+
     //Components
     private UnitMovement _move;
     private Animator _anim;
@@ -23,9 +26,12 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Detect nearby workers
-
         //Direct meeting
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (_interactableWorker.IsSlacking())
+                _interactableWorker.Deslack();
+        }
 
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveY = Input.GetAxisRaw("Vertical");
@@ -37,12 +43,22 @@ public class PlayerControl : MonoBehaviour
             _anim.SetBool("Walking", true);
         }
         else _anim.SetBool("Walking", false);
+    }
 
+    private void FixedUpdate()
+    {
         _move.Walk(_moveX, _moveY);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.transform.name);
+        if (collision.gameObject.tag == "Worker")
+            _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject == _interactableWorker.gameObject)
+            _interactableWorker = null;
     }
 }
