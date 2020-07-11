@@ -77,14 +77,20 @@ public class PlayerControl : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Dog"))
+        {
             _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
+            _interactableWorker.Highlight(Color.white, true);
+        }    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (_interactableWorker)
             if (collision.transform.parent == _interactableWorker.transform)
+            {
+                _interactableWorker.Highlight(false);
                 _interactableWorker = null;
+            }
     }
 
     private void DirectMeeting()
@@ -100,10 +106,11 @@ public class PlayerControl : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (hit.transform.CompareTag("Worker"))
+            //If hit is a slacking worker
+            if (hit.transform.CompareTag("Worker") && hit.transform.GetComponent<WorkerControl>().IsSlacking())
             {
                 //Enqueue dog
-                _dog.EnqueueDeslack(hit.transform.gameObject);
+                _dog.EnqueueDeslack(hit.transform);
             }
         }
     }

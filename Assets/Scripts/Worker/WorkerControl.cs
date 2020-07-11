@@ -11,6 +11,10 @@ public class WorkerControl : MonoBehaviour
     private bool _isSlacking = true;
     private bool _slackable = true;
 
+    //GameObjects
+    [SerializeField]
+    private GameObject _border;
+
     //Components
     private Animator _anim;
 
@@ -40,5 +44,16 @@ public class WorkerControl : MonoBehaviour
     {
         _isSlacking = false;
         _anim.SetBool("isSlacking", false);
+    }
+
+    public void Highlight(Color color, bool active = true)
+    {
+        _border.SetActive(active);
+        _border.GetComponent<SpriteRenderer>().color = color;
+    }
+
+    public void Highlight(bool active)
+    {
+        _border.SetActive(active);
     }
 }
