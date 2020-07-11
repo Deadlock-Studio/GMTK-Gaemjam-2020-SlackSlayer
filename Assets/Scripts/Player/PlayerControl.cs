@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField]
     private DogControl _dog;
+    [SerializeField]
     private WorkerControl _interactableWorker = null;
 
     //Components
@@ -62,14 +63,27 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Worker"))
-            _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+        if (collision.transform.CompareTag("Worker"))
+            _interactableWorker = collision.transform.GetComponent<WorkerControl>();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (_interactableWorker)
-            if (collision.gameObject == _interactableWorker.gameObject)
+            if (collision.transform == _interactableWorker.transform)
+                _interactableWorker = null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Dog"))
+            _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (_interactableWorker)
+            if (collision.transform.parent == _interactableWorker.transform)
                 _interactableWorker = null;
     }
 
