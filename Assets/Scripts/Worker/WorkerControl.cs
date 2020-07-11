@@ -13,7 +13,7 @@ public class WorkerControl : MonoBehaviour
 
     //GameObjects
     [SerializeField]
-    private GameObject _border;
+    private GameObject _border = null;
 
     //Components
     private Animator _anim;

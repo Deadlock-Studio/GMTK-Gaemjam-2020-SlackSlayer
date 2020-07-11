@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
@@ -6,18 +7,18 @@ using UnityEngine;
 
 public class DogControl : MonoBehaviour
 {
-    private float _moveX;
-    private float _moveY;
     private List<Transform> _deslackQueue = new List<Transform>();
 
     //Component
-    private WorkerControl _slack;
-    private UnitMovement _move;
+    [SerializeField]
+    private AIDestinationSetter _destination;
+    private WorkerControl _slack = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        _move = GetComponent<UnitMovement>();
+        _slack = GetComponent<WorkerControl>();
+        _slack.Deslack();
     }
 
     // Update is called once per frame
@@ -25,11 +26,6 @@ public class DogControl : MonoBehaviour
     {
         if (!_slack.IsSlacking())
             enforce();
-    }
-
-    private void FixedUpdate()
-    {
-        _move.Walk(_moveX, _moveY);
     }
 
     public void EnqueueDeslack(Transform transform)
@@ -71,24 +67,16 @@ public class DogControl : MonoBehaviour
             Transform target = _deslackQueue.First();
             goToTarget(target);
             //TODO Check for contact before deslack
-            if (Vector3.Distance(transform.position, target.transform.position) <= 1.5)
+            if (Vector3.Distance(transform.position, target.transform.position) <= 3)
             {
                 target.GetComponent<WorkerControl>().Deslack();
                 Dequeue();
             }
         }
-        else
-        {
-            _moveX = 0;
-            _moveY = 0;
-        }
     }
 
     private void goToTarget(Transform _transform)
     {
-        Vector3 movement = _transform.position - transform.position;
-        movement = movement.normalized;
-        _moveX = movement.x;
-        _moveY = movement.y;
+        _destination.target = _transform;
     }
 }

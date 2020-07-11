@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     private float _moveY;
 
     [SerializeField]
-    private DogControl _dog;
+    private DogControl _dog = null;
     [SerializeField]
     private WorkerControl _interactableWorker = null;
     [SerializeField]
