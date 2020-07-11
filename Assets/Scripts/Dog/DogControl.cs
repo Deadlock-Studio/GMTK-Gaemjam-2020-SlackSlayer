@@ -75,6 +75,11 @@ public class DogControl : MonoBehaviour
                 Dequeue();
             }
         }
+        else
+        {
+            _moveX = 0;
+            _moveY = 0;
+        }
     }
 
     private void goToTarget(Transform _transform)
