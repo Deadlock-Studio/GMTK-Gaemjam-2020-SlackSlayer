@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
 public class WorkerControl : MonoBehaviour
 {
     private bool _isSlacking = true;
