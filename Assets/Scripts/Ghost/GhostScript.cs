@@ -14,8 +14,7 @@ public class GhostScript : MonoBehaviour
     public float _activeTimer;
     public float _speed;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _anim = GetComponent<Animator>();
         _rigidBody2D = GetComponent<Rigidbody2D>();

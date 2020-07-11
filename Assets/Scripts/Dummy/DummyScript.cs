@@ -9,9 +9,7 @@ public class DummyScript : MonoBehaviour
     public float _activeTimer;
     private Animator _anim;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _anim = GetComponent<Animator>();
 

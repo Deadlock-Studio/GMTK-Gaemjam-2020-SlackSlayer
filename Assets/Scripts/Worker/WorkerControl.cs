@@ -28,7 +28,7 @@ public class WorkerControl : MonoBehaviour
         set { _slackable = value; }
     }
 
-    private void Start()
+    private void Awake()
     {
         _anim = GetComponent<Animator>();
         _anim.SetBool("isSlacking", _isSlacking);

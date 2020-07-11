@@ -14,10 +14,13 @@ public class DogControl : MonoBehaviour
     private AIDestinationSetter _destination;
     private WorkerControl _slack = null;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _slack = GetComponent<WorkerControl>();
+    }
+
+    private void Start()
+    {
         _slack.Deslack();
     }
 

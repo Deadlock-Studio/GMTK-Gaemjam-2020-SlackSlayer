@@ -11,7 +11,7 @@ public class PCControl : MonoBehaviour
     {
         return _isHacked;
     }
-    void Start()
+    void Awake()
     {
         _anim = GetComponent<Animator>();
         _anim.SetBool("isHacked", _isHacked);

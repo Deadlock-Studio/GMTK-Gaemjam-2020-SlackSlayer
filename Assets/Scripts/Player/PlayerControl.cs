@@ -22,8 +22,7 @@ public class PlayerControl : MonoBehaviour
     private UnitMovement _move;
     private Animator _anim;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _move = GetComponent<UnitMovement>();
         _anim = GetComponent<Animator>();

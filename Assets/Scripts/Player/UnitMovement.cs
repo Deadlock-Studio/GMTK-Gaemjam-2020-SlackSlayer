@@ -15,7 +15,7 @@ public class UnitMovement : MonoBehaviour
         set { _speed = value; }
     }
 
-    private void Start()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
