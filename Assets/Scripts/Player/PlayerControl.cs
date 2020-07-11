@@ -61,7 +61,8 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject == _interactableWorker.gameObject)
-            _interactableWorker = null;
+        if (_interactableWorker)
+            if (collision.gameObject == _interactableWorker.gameObject)
+                _interactableWorker = null;
     }
 }
