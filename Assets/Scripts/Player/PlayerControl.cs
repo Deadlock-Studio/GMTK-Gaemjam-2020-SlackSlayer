@@ -23,6 +23,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Detect nearby workers
+
+        //Direct meeting
+
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveY = Input.GetAxisRaw("Vertical");
 
@@ -35,5 +39,10 @@ public class PlayerControl : MonoBehaviour
         else _anim.SetBool("Walking", false);
 
         _move.Walk(_moveX, _moveY);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.transform.name);
     }
 }
