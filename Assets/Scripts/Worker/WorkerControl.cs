@@ -25,7 +25,7 @@ public class WorkerControl : MonoBehaviour
     private void Start()
     {
         _anim = GetComponent<Animator>();
-        _anim.SetBool("isSlacking", true);
+        _anim.SetBool("isSlacking", _isSlacking);
     }
 
     public void Slack()
