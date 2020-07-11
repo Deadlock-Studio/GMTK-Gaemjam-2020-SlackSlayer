@@ -75,7 +75,7 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case "Dog":
-                _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
+                _interactableWorker = collision.transform.GetComponent<WorkerControl>();
                 _interactableWorker.Highlight(Color.white, true);
                 break;
 
@@ -101,7 +101,7 @@ public class PlayerControl : MonoBehaviour
 
             case "Dog":
                 if (_interactableWorker)
-                    if (collision.transform.parent == _interactableWorker.transform)
+                    if (collision.transform == _interactableWorker.transform)
                     {
                         _interactableWorker.Highlight(false);
                         _interactableWorker = null;

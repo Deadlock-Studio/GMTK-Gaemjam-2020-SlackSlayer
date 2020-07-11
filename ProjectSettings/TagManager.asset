@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Worker
   - PC
+  - Dog
   layers:
   - Default
   - TransparentFX
