@@ -9,6 +9,7 @@ public class ThrowableScript : MonoBehaviour
     [SerializeField]
     private WorkerControl _interactableWorker = null;
 
+    public GameObject throwablePickupPrefab;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,11 +21,12 @@ public class ThrowableScript : MonoBehaviour
                 if (_interactableWorker != null)
                     if (_interactableWorker.IsSlacking())
                         _interactableWorker.Deslack();
-
+                Instantiate(throwablePickupPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 break;
 
             case "Environment":
+                Instantiate(throwablePickupPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 break;
 
