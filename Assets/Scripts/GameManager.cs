@@ -6,7 +6,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] workerList;
-    
+
+    private static float _workProgress = 0;
+
+    private float _lastTime = 0;
+    private float _currentTime = 0;
+    private float _interval = 1.5f;
 
     private void Awake()
     {
@@ -15,7 +20,19 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Wave(2);
+        Wave(1);
+    }
+
+    private void Update()
+    {
+        _currentTime += Time.deltaTime;
+        if (_currentTime - _lastTime >= _interval)
+        {
+            Produce();
+            _lastTime = _currentTime;
+        }
+        //TODO Progress bar
+        Debug.Log(_workProgress);
     }
 
     // i is the amount of slackers
@@ -36,6 +53,22 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < target.Count; j++)
             {
                 workerList[target[j]].GetComponent<WorkerControl>().Slack();
+            }
+        }
+    }
+
+    public static void Work(float amount)
+    {
+        _workProgress += amount;
+    }
+
+    private void Produce()
+    {
+        for (int i = 0; i < workerList.Length; i++)
+        {
+            if (!workerList[i].GetComponent<WorkerControl>().IsSlacking())
+            {
+                Work(1);
             }
         }
     }
