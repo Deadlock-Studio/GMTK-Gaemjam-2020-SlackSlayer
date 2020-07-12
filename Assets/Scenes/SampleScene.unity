@@ -1507,12 +1507,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5597636889522075713, guid: 14234e97f8d8b734e9334adbd831e1e2,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7cc8f655f3beb0e40ac4f561811c532b,
-        type: 3}
     - target: {fileID: 5597636889522075714, guid: 14234e97f8d8b734e9334adbd831e1e2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3311,11 +3305,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 3009889153079601105, guid: c419b1ed0210b1c4db75cd7396d6722d,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c419b1ed0210b1c4db75cd7396d6722d, type: 3}
 --- !u!1001 &5055913924695996613
