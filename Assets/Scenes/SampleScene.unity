@@ -963,12 +963,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923875744}
   m_CullTransparentMesh: 0
---- !u!1 &975396554 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1138273028131339030, guid: fdd8dd641a109784b9f134930127fa29,
-    type: 3}
-  m_PrefabInstance: {fileID: 1006131872}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &992462190 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9102235235360308705, guid: 6b33a6a2a7b20cf44af493e80ea07c18,
@@ -988,11 +982,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1138273028131339030, guid: fdd8dd641a109784b9f134930127fa29,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4169130728019738025, guid: fdd8dd641a109784b9f134930127fa29,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1048,11 +1037,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4169130728019738028, guid: fdd8dd641a109784b9f134930127fa29,
-        type: 3}
-      propertyPath: _hacked
-      value: 
-      objectReference: {fileID: 975396554}
     - target: {fileID: 4169130728019738029, guid: fdd8dd641a109784b9f134930127fa29,
         type: 3}
       propertyPath: m_Name
@@ -3159,7 +3143,7 @@ PrefabInstance:
     - target: {fileID: 5235391173703972443, guid: 7c140541e8590f146adc1189a0732c56,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c140541e8590f146adc1189a0732c56, type: 3}

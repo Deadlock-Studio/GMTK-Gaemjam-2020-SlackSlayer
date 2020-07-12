@@ -272,11 +272,13 @@ public class PlayerControl : MonoBehaviour
             case "Worker":
             case "Dog":
                 _interactableWorker = collision.transform.GetComponent<WorkerControl>();
-                _interactableWorker.Highlight(Color.white, true);
+                _interactableWorker.Highlight(true);
                 break;
 
             case "PC":
                 _nearPC = true;
+                _interactablePC = collision.transform.GetComponent<PCControl>();
+                _interactablePC.Highlight(true);
                 break;
 
             default:
@@ -301,6 +303,13 @@ public class PlayerControl : MonoBehaviour
 
             case "PC":
                 _nearPC = false;
+                if (_interactablePC) {
+                    if (collision.transform == _interactablePC.transform) {
+                        _interactablePC.Highlight(false);
+                        _interactablePC = null;
+                    }
+                }
+
                 break;
 
             default:

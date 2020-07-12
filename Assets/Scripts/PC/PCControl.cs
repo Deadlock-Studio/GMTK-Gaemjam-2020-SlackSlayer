@@ -6,6 +6,9 @@ public class PCControl : MonoBehaviour
 {
     List<WorkerControl> _hackList = new List<WorkerControl>();
 
+    [SerializeField]
+    private GameObject _border = null;
+
     //Component
     private Animator _anim;
 
@@ -26,5 +29,15 @@ public class PCControl : MonoBehaviour
     {
         _hackList.Add(worker);
         worker.Hack();
+    }
+    public void Highlight(Color color, bool active = true)
+    {
+        _border.SetActive(active);
+        _border.GetComponent<SpriteRenderer>().color = color;
+    }
+
+    public void Highlight(bool active)
+    {
+        _border.SetActive(active);
     }
 }
