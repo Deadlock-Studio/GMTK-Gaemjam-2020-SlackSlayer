@@ -48,7 +48,7 @@ public class GhostScript : MonoBehaviour
     {
         //move
         Vector2 position = _rigidBody2D.position;
-        position.x = position.x + Time.deltaTime * _speed * _movingDirection;
+        position.x += Time.fixedDeltaTime * _speed * _movingDirection;
         _rigidBody2D.MovePosition(position);
     }
 
@@ -60,7 +60,7 @@ public class GhostScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Worker")
+        if (collision.gameObject.CompareTag("Worker"))
         {
             _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
         }
