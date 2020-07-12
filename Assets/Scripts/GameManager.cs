@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private float _lastWaveTime = 0;
     public float waveDuration = 10;
 
+    public LevelCompleteUI lvlUI;
+
     [SerializeField]
     private float _gameTime = 0;
 
@@ -170,12 +172,14 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
         gameEnded = true;
+        lvlUI.Victory();
         Debug.Log("You won!");
     }
 
     private void Lose()
     {
         gameEnded = true;
+        lvlUI.Defeat();
         Debug.Log("You lost!");
     }
 }

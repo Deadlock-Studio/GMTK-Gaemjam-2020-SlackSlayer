@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
 
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject skipLevelButton;
+    public GameObject GameUI;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,16 +37,25 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+        GameUI.SetActive(true);
+
     }
 
     public void Pause() {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+        GameUI.SetActive(false);
+
     }
 
     public void SkipLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            skipLevelButton.SetActive(true);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
     }
     public void BackToMainMenu() {
         SceneManager.LoadScene(0);
