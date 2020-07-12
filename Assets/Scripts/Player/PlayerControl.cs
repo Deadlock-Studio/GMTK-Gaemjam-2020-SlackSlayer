@@ -155,12 +155,11 @@ public class PlayerControl : MonoBehaviour
             case Inventory.Item.THROWABLE:
                 if (_inventory.GetThrowablesNumber() > 0)
                 {
+                    _inventory.DecreaseItemInInventory(Inventory.Item.THROWABLE);
                     GameObject throwable = Instantiate(throwablePrefab, transform.position, Quaternion.identity);
                     //calculate shoot direction from crosshair
                     Vector3 shootDirection = crosshair.transform.localPosition.normalized;
                     throwable.GetComponent<Rigidbody2D>().AddForce(shootDirection * throwable.GetComponent<ThrowableScript>().throwForce, ForceMode2D.Impulse);
-                    _inventory.DecreaseItemInInventory(Inventory.Item.THROWABLE);
-
                     _selectedItem = Inventory.Item.NOTHING;
                     GUIElements.ToggleActive(0, false);
                 }

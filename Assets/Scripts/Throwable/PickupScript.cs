@@ -23,14 +23,20 @@ public class PickupScript : MonoBehaviour
             case "Usb":
                 item = Inventory.Item.USB;
                 break;
+            default:
+                item = Inventory.Item.NOTHING;
+                break;
         }
     }
 
 private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player")){
-            _inventory.IncreaseItemInInventory(item);
-            Destroy(gameObject);
+            if (item != Inventory.Item.NOTHING) {
+                Destroy(gameObject);
+                _inventory.IncreaseItemInInventory(item);
+            }
+
         }
     }
 }

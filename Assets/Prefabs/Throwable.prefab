@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3672153747531555883}
   - component: {fileID: -5160626447994508814}
   - component: {fileID: 2171958158850440325}
-  - component: {fileID: 7711152177082329932}
   m_Layer: 9
   m_Name: Throwable
   m_TagString: Throwable
@@ -148,15 +147,3 @@ MonoBehaviour:
   _interactableWorker: {fileID: 0}
   throwablePickupPrefab: {fileID: 5235391173703972443, guid: 7c140541e8590f146adc1189a0732c56,
     type: 3}
---- !u!114 &7711152177082329932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934421265244238108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce4759e3a6d2f04fa90b3c0f93d91d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
