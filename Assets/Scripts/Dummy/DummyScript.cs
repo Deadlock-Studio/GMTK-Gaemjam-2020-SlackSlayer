@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class DummyScript : MonoBehaviour
 {
+    [SerializeField]
     private WorkerControl _interactableWorker = null;
+
     public float _activeTimer;
     private Animator _anim;
 
