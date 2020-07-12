@@ -79,6 +79,16 @@ public class PlayerControl : MonoBehaviour
             }   
         }
 
+        //select usb by pressing 2
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (_inventory.GetUsbsNumber() > 0)
+            {
+                GUIElements.ToggleActive(1, true);
+                _selectedItem = Inventory.Item.USB;
+            }
+        }
+
         //press mouse to use item after selecting an item
         if (Input.GetMouseButtonDown(0))
         {
