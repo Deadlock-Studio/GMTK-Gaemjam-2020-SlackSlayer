@@ -22,10 +22,10 @@ public class DummyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if on dummy trigger zone then no slack
-        if (_interactableWorker != null)
-            if (_interactableWorker.IsSlacking())
-                _interactableWorker.Deslack();
+        ////if on dummy trigger zone then no slack
+        //if (_interactableWorker != null)
+        //    if (_interactableWorker.IsSlacking())
+        //        _interactableWorker.Deslack();
 
 
         //check the active timer
@@ -47,13 +47,11 @@ public class DummyScript : MonoBehaviour
         if (collision.gameObject.tag == "Worker")
         {
             _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
+
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (_interactableWorker)
-            if (collision.gameObject == _interactableWorker.gameObject)
-                _interactableWorker = null;
-    }
 }

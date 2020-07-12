@@ -29,10 +29,6 @@ public class GhostScript : MonoBehaviour
         //change orientation of ghost sprite
         _anim.SetBool("isMovingLeft", _isMovingLeft);
 
-        //if on dummy trigger zone then no slack
-        if (_interactableWorker != null)
-            if (_interactableWorker.IsSlacking())
-                _interactableWorker.Deslack();
 
         //check the active timer, if < 0 then despawn
         if (_activeTimer <= 0)
@@ -62,15 +58,14 @@ public class GhostScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Worker"))
         {
             _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+            //if on dummy trigger zone then no slack
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
+
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (_interactableWorker)
-            if (collision.gameObject == _interactableWorker.gameObject)
-                _interactableWorker = null;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
