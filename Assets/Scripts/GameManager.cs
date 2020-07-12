@@ -7,11 +7,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] workerList;
 
+    [SerializeField]
     private static float _workProgress = 0;
+    public float clearProgress = 0;
+    public float waveNumber = 0;
 
+    public float waveDuration = 10;
+    private float _preGame = 5;
     private float _lastTime = 0;
     private float _currentTime = 0;
     private float _interval = 1.5f;
+    [SerializeField]
+    private float _gameTime = 0;
 
     private void Awake()
     {
@@ -20,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Wave(1);
+        _gameTime = _preGame + waveNumber * waveDuration;
     }
 
     private void Update()
@@ -31,8 +38,22 @@ public class GameManager : MonoBehaviour
             Produce();
             _lastTime = _currentTime;
         }
+
         //TODO Progress bar
-        Debug.Log(_workProgress);
+
+        //Check win condition
+        if (CheckWin())
+        {
+            Win();
+        }
+        else
+        {
+            _gameTime -= Time.deltaTime;
+            if (_gameTime <= 0)
+            {
+                Lose();
+            }
+        }   
     }
 
     // i is the amount of slackers
@@ -71,5 +92,29 @@ public class GameManager : MonoBehaviour
                 Work(1);
             }
         }
+    }
+
+    private bool CheckWin()
+    {
+        if (_workProgress >= clearProgress)
+        {
+            //Win
+            return true;
+        }
+        else
+        {
+            //Lose
+            return false;
+        }
+    }
+
+    private void Win()
+    {
+        Debug.Log("You won!");
+    }
+
+    private void Lose()
+    {
+        Debug.Log("You lost!");
     }
 }
