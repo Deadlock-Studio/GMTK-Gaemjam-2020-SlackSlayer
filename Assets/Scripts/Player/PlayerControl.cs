@@ -72,7 +72,11 @@ public class PlayerControl : MonoBehaviour
 
         //select throwable by pressing 1
         if (Input.GetKeyDown(KeyCode.Alpha1)){
-            _selectedItem = Inventory.Item.THROWABLE;
+            if (_inventory.GetThrowablesNumber() > 0)
+            {
+                GUIElements.ToggleActive(0, true);
+                _selectedItem = Inventory.Item.THROWABLE;
+            }   
         }
 
         //press mouse to use item after selecting an item

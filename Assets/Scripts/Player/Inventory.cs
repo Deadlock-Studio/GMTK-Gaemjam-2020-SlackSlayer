@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Inventory : MonoBehaviour
                 break;
             case Item.THROWABLE:
                 _throwables++;
+                GUIElements.ToggleIcon(0, true);
                 break;
             case Item.USB:
                 _usbs++;
@@ -50,6 +52,7 @@ public class Inventory : MonoBehaviour
                 break;
             case Item.THROWABLE:
                 if (_throwables > 0) _throwables--;
+                if (_throwables == 0) GUIElements.ToggleIcon(0, false);
                 break;
             case Item.USB:
                 if (_usbs > 0) _usbs--;
