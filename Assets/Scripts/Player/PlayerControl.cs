@@ -154,6 +154,9 @@ public class PlayerControl : MonoBehaviour
                     Vector3 shootDirection = crosshair.transform.localPosition.normalized;
                     throwable.GetComponent<Rigidbody2D>().AddForce(shootDirection * throwable.GetComponent<ThrowableScript>().throwForce, ForceMode2D.Impulse);
                     _inventory.DecreaseItemInInventory(Inventory.Item.THROWABLE);
+
+                    _selectedItem = Inventory.Item.NOTHING;
+                    GUIElements.ToggleActive(0, false);
                 }
                 break;
             case Inventory.Item.USB:

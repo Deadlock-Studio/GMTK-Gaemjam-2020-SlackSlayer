@@ -32,7 +32,9 @@ public class GUIElements : MonoBehaviour
     private void InventoryUpdate()
     {
         if (inventory._throwables > 0) ToggleIcon(0, true);
+        else ToggleIcon(0, false);
         if (inventory._usbs > 0) ToggleIcon(1, true);
+        else ToggleIcon(1, false);
     }
 
     //0 throwables
