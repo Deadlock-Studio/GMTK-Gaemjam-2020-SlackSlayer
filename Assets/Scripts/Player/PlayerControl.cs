@@ -271,6 +271,10 @@ public class PlayerControl : MonoBehaviour
         switch (collision.gameObject.tag) {
             case "Worker":
             case "Dog":
+                if (_interactableWorker)
+                {
+                    _interactableWorker.Highlight(false);
+                }
                 _interactableWorker = collision.transform.GetComponent<WorkerControl>();
                 _interactableWorker.Highlight(true);
                 break;
