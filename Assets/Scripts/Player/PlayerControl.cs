@@ -74,15 +74,28 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)){
             if (_inventory.GetThrowablesNumber() > 0)
             {
-                GUIElements.ToggleActive(0, true);
-                _selectedItem = Inventory.Item.THROWABLE;
+                if (_selectedItem == Inventory.Item.THROWABLE)
+                {
+                    GUIElements.ToggleActive(0, false);
+                    _selectedItem = Inventory.Item.NOTHING;
+                }
+                else
+                {
+                    GUIElements.ToggleActive(0, true);
+                    _selectedItem = Inventory.Item.THROWABLE;
+                }
             }   
         }
 
         //select usb by pressing 2
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_inventory.GetUsbsNumber() > 0)
+            if (_selectedItem == Inventory.Item.USB)
+            {
+                GUIElements.ToggleActive(1, false);
+                _selectedItem = Inventory.Item.NOTHING;
+            }
+            else
             {
                 GUIElements.ToggleActive(1, true);
                 _selectedItem = Inventory.Item.USB;
