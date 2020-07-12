@@ -65,7 +65,7 @@ public class DogControl : MonoBehaviour
             Transform target = _deslackQueue.First();
             goToTarget(target);
             //TODO Check for contact before deslack
-            if (Vector3.Distance(transform.position, target.transform.position) <= 3)
+            if (Vector3.Distance(transform.position, target.transform.position) <= 2)
             {
                 target.GetComponent<WorkerControl>().Deslack();
                 Dequeue();
