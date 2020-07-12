@@ -2353,11 +2353,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowablePickup
       objectReference: {fileID: 0}
-    - target: {fileID: 5235391173703972443, guid: 7c140541e8590f146adc1189a0732c56,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c140541e8590f146adc1189a0732c56, type: 3}
 --- !u!1001 &7418944355055971898
