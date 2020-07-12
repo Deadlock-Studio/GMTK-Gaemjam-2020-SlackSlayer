@@ -6,7 +6,8 @@ using UnityEngine.XR.WSA.Input;
 [RequireComponent(typeof(Animator))]
 public class WorkerControl : MonoBehaviour
 {
-    private bool _isSlacking = true;
+    [SerializeField]
+    private bool _isSlacking = false;
     private bool _isHacked = false;
     private bool _slackable = true;
 

@@ -1192,12 +1192,12 @@ PrefabInstance:
     - target: {fileID: 4169130728019738025, guid: fdd8dd641a109784b9f134930127fa29,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2587755
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4169130728019738025, guid: fdd8dd641a109784b9f134930127fa29,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.1
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 4169130728019738025, guid: fdd8dd641a109784b9f134930127fa29,
         type: 3}
@@ -1566,6 +1566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597636889522075718, guid: 14234e97f8d8b734e9334adbd831e1e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14234e97f8d8b734e9334adbd831e1e2, type: 3}
@@ -3152,6 +3157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GhostPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 4022465474286228023, guid: 5cb4df0af7b2bbe48be4f4ab05068b88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cb4df0af7b2bbe48be4f4ab05068b88, type: 3}
 --- !u!1001 &2189665512538257640
@@ -3165,6 +3175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DummyPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 2189665512382747459, guid: 327a648a5fa9a9d4296f008fa6e59e96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2189665512382747463, guid: 327a648a5fa9a9d4296f008fa6e59e96,
         type: 3}
@@ -3453,6 +3468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowablePickup
       objectReference: {fileID: 0}
+    - target: {fileID: 5235391173703972443, guid: 7c140541e8590f146adc1189a0732c56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c140541e8590f146adc1189a0732c56, type: 3}
 --- !u!1001 &7418944355055971898
@@ -3600,6 +3620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PC
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102235235360308716, guid: 6b33a6a2a7b20cf44af493e80ea07c18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b33a6a2a7b20cf44af493e80ea07c18, type: 3}
