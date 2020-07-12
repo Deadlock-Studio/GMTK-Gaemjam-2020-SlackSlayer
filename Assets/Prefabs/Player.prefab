@@ -137,6 +137,7 @@ MonoBehaviour:
   _dog: {fileID: 0}
   _interactableWorker: {fileID: 0}
   _interactablePC: {fileID: 0}
+  _nearPC: 0
   crosshair: {fileID: 3009889152554305379}
   cam: {fileID: 0}
   throwablePrefab: {fileID: 934421265244238108, guid: d8691cd42682d0e4f941ca3f2258d386,
@@ -219,7 +220,7 @@ MonoBehaviour:
   _throwables: 0
   _ghosts: 0
   _dummies: 0
-  _usbs: 0
+  _usbs: 2
 --- !u!1 &3009889152554305379
 GameObject:
   m_ObjectHideFlags: 0

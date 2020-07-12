@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Numerics;
 using UnityEditor;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     private WorkerControl _interactableWorker = null;
     [SerializeField]
     private PCControl _interactablePC = null;
+    [SerializeField]
+    private bool _nearPC = false;
 
     //Components
     private UnitMovement _move;
@@ -63,11 +66,7 @@ public class PlayerControl : MonoBehaviour
         {
 	        DirectMeeting();
 
-            if (_interactablePC != null)
-            {
-                if (!_interactablePC.IsHacked())
-                    _interactablePC.Hacked();
-            }
+            if (_nearPC) InitiateHacking();
         }
 
         //select throwable by pressing 1
@@ -110,7 +109,7 @@ public class PlayerControl : MonoBehaviour
                 UseItem(_selectedItem);
         }
 
-	//Right click to queue for dog to deslack
+	    //Right click to queue for dog to deslack
         if (Input.GetMouseButtonDown(1))
         {
             if (_dog) DogEnqueue();
@@ -167,6 +166,50 @@ public class PlayerControl : MonoBehaviour
                 }
                 break;
             case Inventory.Item.USB:
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Worker"));
+                RaycastHit2D hit2 = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Dog"));
+
+                if (hit.collider != null)
+                {
+                    //If hit is a worker
+                    if (hit.transform.CompareTag("Worker"))
+                    {
+                        if (!hit.transform.GetComponent<WorkerControl>().IsHacked())
+                        {
+                            //Create backdoor
+                            _interactablePC.AddToHackList(hit.transform.GetComponent<WorkerControl>());
+                            _inventory.DecreaseItemInInventory(Inventory.Item.USB);
+                        }
+                        else
+                        {
+                            //TODO "This target has already been hacked"
+                        }
+                        
+                        _selectedItem = Inventory.Item.NOTHING;
+                        GUIElements.ToggleActive(1, false);
+                    }
+                }
+
+                if (hit2.collider != null)
+                {
+                    //If hit is a worker
+                    if (hit2.transform.CompareTag("Dog"))
+                    {
+                        if (!hit2.transform.GetComponent<WorkerControl>().IsHacked())
+                        {
+                            //Create backdoor
+                            _interactablePC.AddToHackList(hit2.transform.GetComponent<WorkerControl>());
+                            _inventory.DecreaseItemInInventory(Inventory.Item.USB);
+                        }
+                        else
+                        {
+                            //TODO "This target has already been hacked"
+                        }
+
+                        _selectedItem = Inventory.Item.NOTHING;
+                        GUIElements.ToggleActive(1, false);
+                    }
+                }
                 break;
             default:
                 break;
@@ -178,16 +221,13 @@ public class PlayerControl : MonoBehaviour
     {
         switch (collision.gameObject.tag) {
             case "Worker":
-                _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
-                break;
-
             case "Dog":
                 _interactableWorker = collision.transform.GetComponent<WorkerControl>();
                 _interactableWorker.Highlight(Color.white, true);
                 break;
 
             case "PC":
-                _interactablePC = collision.gameObject.GetComponent<PCControl>();
+                _nearPC = true;
                 break;
 
             default:
@@ -201,11 +241,6 @@ public class PlayerControl : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Worker":
-                if (_interactableWorker)
-                    if (collision.gameObject == _interactableWorker.gameObject)
-                        _interactableWorker = null;
-                break;
-
             case "Dog":
                 if (_interactableWorker)
                     if (collision.transform == _interactableWorker.transform)
@@ -216,9 +251,7 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case "PC":
-                if (_interactablePC)
-                    if (collision.gameObject == _interactablePC.gameObject)
-                        _interactablePC = null;
+                _nearPC = false;
                 break;
 
             default:
@@ -231,6 +264,14 @@ public class PlayerControl : MonoBehaviour
         if (_interactableWorker != null)
             if (_interactableWorker.IsSlacking())
                 _interactableWorker.Deslack();
+    }
+
+    private void InitiateHacking()
+    {
+        if (_interactablePC != null)
+        {
+            _interactablePC.InitiateHacking();
+        }
     }
 
     private void DogEnqueue()
