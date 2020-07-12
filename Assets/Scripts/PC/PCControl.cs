@@ -10,11 +10,9 @@ public class PCControl : MonoBehaviour
     private GameObject _border = null;
 
     //Component
-    private Animator _anim;
 
     void Awake()
     {
-        _anim = GetComponent<Animator>();
     }
 
     public void InitiateHacking()

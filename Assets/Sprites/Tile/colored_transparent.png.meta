@@ -76,7 +76,7 @@ TextureImporter:
     second: colored_transparent_23
   - first:
       213: -6002157571523280566
-    second: slacknt worker
+    second: worker
   - first:
       213: 450357103052299746
     second: colored_transparent_25
@@ -745,7 +745,7 @@ TextureImporter:
     second: colored_transparent_246
   - first:
       213: 1036879547258435572
-    second: slack worker
+    second: worker
   - first:
       213: -5255684318634073260
     second: colored_transparent_248
@@ -12486,7 +12486,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slacknt worker
+      name: slack worker
       rect:
         serializedVersion: 2
         x: 400
@@ -17169,7 +17169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slack worker
+      name: worker
       rect:
         serializedVersion: 2
         x: 384
