@@ -2790,12 +2790,17 @@ PrefabInstance:
     - target: {fileID: 3009889152210957392, guid: c419b1ed0210b1c4db75cd7396d6722d,
         type: 3}
       propertyPath: _dummies
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3009889152210957392, guid: c419b1ed0210b1c4db75cd7396d6722d,
         type: 3}
       propertyPath: _throwables
-      value: 100
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009889152210957392, guid: c419b1ed0210b1c4db75cd7396d6722d,
+        type: 3}
+      propertyPath: _usbs
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3009889152210957415, guid: c419b1ed0210b1c4db75cd7396d6722d,
         type: 3}

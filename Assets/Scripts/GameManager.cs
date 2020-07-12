@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] workerList;
     public PlayerControl player;
+
+    public Text slackTime;
+    public Text slackCount;
 
     [SerializeField]
     private float _workProgress = 0;
@@ -40,16 +44,34 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         _currentTime += Time.deltaTime;
+        //Announcement
+        if (_waveCount < waveNumber)
+        {
+            if (_waveCount == 0)
+            {
+                slackTime.text = "Next wave: " + (_preGame - _currentTime).ToString("0");
+                slackCount.text = "Slack Count: " + waveAffect;
+            }
+            else
+            {
+                slackTime.text = "Next wave: " + (waveDuration - (_currentTime - _lastWaveTime)).ToString("0");
+                slackCount.text = "Slack Count: " + waveAffect;
+            }
+        }
+        else
+        {
+            slackTime.text = "Final wave";
+            slackCount.text = "";
+        }
 
         //Wave
         player.SetControl(true);
-        if (_waveCount == 0 || _currentTime - _lastWaveTime >= waveDuration)
+        if (_waveCount == 0 && _currentTime > _preGame || _currentTime - _lastWaveTime >= waveDuration)
         {
             if (_waveCount < waveNumber)
             {
                 Wave(waveAffect);
                 IncreaseWave();
-                //TODO Announce next wave
                 _lastWaveTime = _currentTime;
             }
         }
