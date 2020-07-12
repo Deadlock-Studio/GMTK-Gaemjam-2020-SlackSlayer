@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Text slackTime;
     public Text slackCount;
+    public Slider progressBar;
+    private bool gameEnded = false;
 
     [SerializeField]
     private float _workProgress = 0;
@@ -43,6 +45,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameEnded)
+            return;
+
         _currentTime += Time.deltaTime;
         //Announcement
         if (_waveCount < waveNumber)
@@ -82,7 +87,7 @@ public class GameManager : MonoBehaviour
             _lastTime = _currentTime;
         }
 
-        //TODO Progress bar
+        progressBar.value = _workProgress / clearProgress;
 
         //Check win condition
         if (CheckWin())
@@ -96,7 +101,7 @@ public class GameManager : MonoBehaviour
             {
                 Lose();
             }
-        }   
+        }
     }
 
     private void IncreaseWave()
@@ -164,11 +169,13 @@ public class GameManager : MonoBehaviour
 
     private void Win()
     {
+        gameEnded = true;
         Debug.Log("You won!");
     }
 
     private void Lose()
     {
+        gameEnded = true;
         Debug.Log("You lost!");
     }
 }
