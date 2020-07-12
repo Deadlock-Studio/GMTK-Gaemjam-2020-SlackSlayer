@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Numerics;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -14,6 +15,8 @@ using Vector3 = UnityEngine.Vector3;
 [RequireComponent(typeof(UnitMovement))]
 public class PlayerControl : MonoBehaviour
 {
+    private bool _control = false;
+
     private float _moveX;
     private float _moveY;
     private Vector2 _mousePos;
@@ -64,7 +67,7 @@ public class PlayerControl : MonoBehaviour
 
         //Direct meeting
         //hack pc
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && _control)
         {
 	        DirectMeeting();
 
@@ -72,7 +75,8 @@ public class PlayerControl : MonoBehaviour
         }
 
         //select throwable by pressing 1
-        if (Input.GetKeyDown(KeyCode.Alpha1)){
+        if (Input.GetKeyDown(KeyCode.Alpha1) && _control)
+        {
             if (_inventory.GetThrowableNumber() > 0)
             {
                 if (_selectedItem == Inventory.Item.THROWABLE)
@@ -88,7 +92,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //select usb by pressing 2
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && _control)
         {
             if (_inventory.GetUsbNumber() > 0)
             {
@@ -105,7 +109,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //select dummy by pressing 3
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && _control)
         {
             if (_inventory.GetDummyNumber() > 0)
             {
@@ -122,7 +126,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //select ghost by pressing 3
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && _control)
         {
             if (_inventory.GetGhostNumber() > 0)
             {
@@ -139,18 +143,17 @@ public class PlayerControl : MonoBehaviour
         }
 
         //press mouse to use item after selecting an item
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _control)
         {
             if(_selectedItem != Inventory.Item.NOTHING)
                 UseItem(_selectedItem);
         }
 
 	    //Right click to queue for dog to deslack
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && _control)
         {
             if (_dog) DogEnqueue();
         }
-
 
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveY = Input.GetAxisRaw("Vertical");
@@ -168,7 +171,11 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _move.Walk(_moveX, _moveY);
+        if (_control)
+        {
+            _move.Walk(_moveX, _moveY);
+        }
+        
         _look = _mousePos - _rb.position;
     }
 
@@ -349,5 +356,10 @@ public class PlayerControl : MonoBehaviour
                 _dog.EnqueueDeslack(hit.transform);
             }
         }
+    }
+
+    public void SetControl(bool active)
+    {
+        _control = active;
     }
 }

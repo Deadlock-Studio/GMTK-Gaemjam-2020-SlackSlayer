@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] workerList;
+    public PlayerControl player;
 
     [SerializeField]
     private static float _workProgress = 0;
@@ -32,6 +33,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //Pregame screen
+
+        if (_currentTime >= _preGame)
+        {
+            player.SetControl(true);
+        }
+
         _currentTime += Time.deltaTime;
         if (_currentTime - _lastTime >= _interval)
         {

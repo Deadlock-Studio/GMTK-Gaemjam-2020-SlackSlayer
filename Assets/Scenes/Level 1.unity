@@ -201,6 +201,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3009889152222396592}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &51090101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3009889152210957420, guid: c419b1ed0210b1c4db75cd7396d6722d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3009889152222396592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ed80be7bf6dcb4e834ca10fe074a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &408601618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,8 +1242,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workerList: []
+  player: {fileID: 51090101}
   clearProgress: 5
   waveNumber: 1
+  waveDuration: 10
+  _gameTime: 0
 --- !u!4 &1189867923
 Transform:
   m_ObjectHideFlags: 0
