@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
 {
-    private float _speed = 5;
+    private float _speed = 6;
     private float _diagSlow = 0.7f;
 
     //Component
