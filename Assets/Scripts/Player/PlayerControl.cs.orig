@@ -1,66 +1,98 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
+using System.Numerics;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(UnitMovement))]
-
 public class PlayerControl : MonoBehaviour
 {
     private float _moveX;
     private float _moveY;
+    private Vector2 _mousePos;
+    private Vector2 _look;
+    private Inventory.Item _selectedItem;
+
+
+
 
     [SerializeField]
-<<<<<<< HEAD
-    private DogControl _dog;
-=======
-    private PCControl _interactablePC = null;
-
->>>>>>> PC
+    private DogControl _dog = null;
     [SerializeField]
     private WorkerControl _interactableWorker = null;
+    [SerializeField]
+    private PCControl _interactablePC = null;
 
     //Components
     private UnitMovement _move;
     private Animator _anim;
+    private Inventory _inventory;
+    private Rigidbody2D _rb;
+    
+    public GameObject crosshair;
+    public Camera cam;
+    public GameObject throwablePrefab;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         _move = GetComponent<UnitMovement>();
         _anim = GetComponent<Animator>();
+        _inventory = GetComponent<Inventory>();
+        _rb = GetComponent<Rigidbody2D>();
+        _selectedItem = Inventory.Item.NOTHING;
+        //hide mouse cursor
+        Cursor.visible = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
+        //Interact
+=======
+
+        //mouse coordinate 
+        _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
         //Direct meeting
         //hack pc
+>>>>>>> throwable
         if (Input.GetKeyDown(KeyCode.E))
         {
-<<<<<<< HEAD
-            DirectMeeting();
-        }
-
-        //Right click to queue for dog to deslack
-        if (Input.GetMouseButtonDown(1))
-        {
-            DogEnqueue();
-=======
-            if (_interactableWorker != null)
-                if (_interactableWorker.IsSlacking())
-                    _interactableWorker.Deslack();
+	        DirectMeeting();
 
             if (_interactablePC != null)
             {
                 if (!_interactablePC.IsHacked())
                     _interactablePC.Hacked();
             }
->>>>>>> PC
+        }
+
+<<<<<<< HEAD
+	    //Right click to queue for dog to deslack
+        if (Input.GetMouseButtonDown(1))
+        {
+            DogEnqueue();
+=======
+        //select throwable by pressing 1
+        if (Input.GetKeyDown(KeyCode.Alpha1)){
+            _selectedItem = Inventory.Item.THROWABLE;
+        }
+
+        //press mouse to use item after selecting an item
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(_selectedItem != Inventory.Item.NOTHING)
+                UseItem(_selectedItem);
+>>>>>>> throwable
         }
 
         _moveX = Input.GetAxisRaw("Horizontal");
@@ -73,22 +105,54 @@ public class PlayerControl : MonoBehaviour
             _anim.SetBool("Walking", true);
         }
         else _anim.SetBool("Walking", false);
+
+        MoveCrosshair();
     }
 
     private void FixedUpdate()
     {
         _move.Walk(_moveX, _moveY);
+        _look = _mousePos - _rb.position;
+    }
+
+    private void MoveCrosshair() {
+        Vector3 aim = new Vector3(_look.x, _look.y, 0.0f);
+        crosshair.transform.localPosition = aim;
+    }
+    private void UseItem(Inventory.Item item) {
+        switch (item) {
+            case Inventory.Item.GHOST:
+                break;
+            case Inventory.Item.DUMMY:
+                break;
+            case Inventory.Item.THROWABLE:
+                if (_inventory.GetThrowablesNumber() > 0)
+                {
+                    GameObject throwable = Instantiate(throwablePrefab, transform.position, Quaternion.identity);
+                    //calculate shoot direction from crosshair
+                    Vector3 shootDirection = crosshair.transform.localPosition.normalized;
+                    throwable.GetComponent<Rigidbody2D>().AddForce(shootDirection * throwable.GetComponent<ThrowableScript>().throwForce, ForceMode2D.Impulse);
+                    _inventory.DecreaseItemInInventory(Inventory.Item.THROWABLE);
+                }
+                break;
+            case Inventory.Item.USB:
+                break;
+            default:
+                break;
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-<<<<<<< HEAD
-        if (collision.transform.CompareTag("Worker"))
-            _interactableWorker = collision.transform.GetComponent<WorkerControl>();
-=======
         switch (collision.gameObject.tag) {
             case "Worker":
                 _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+                break;
+
+            case "Dog":
+                _interactableWorker = collision.transform.GetComponent<WorkerControl>();
+                _interactableWorker.Highlight(Color.white, true);
                 break;
 
             case "PC":
@@ -97,35 +161,38 @@ public class PlayerControl : MonoBehaviour
 
             default:
                 break;
-        }
->>>>>>> PC
+
+        }  
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-<<<<<<< HEAD
-        if (_interactableWorker)
-            if (collision.transform == _interactableWorker.transform)
-                _interactableWorker = null;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.transform.CompareTag("Dog"))
+        switch (collision.gameObject.tag)
         {
-            _interactableWorker = collision.transform.parent.GetComponent<WorkerControl>();
-            _interactableWorker.Highlight(Color.white, true);
-        }    
-    }
+            case "Worker":
+                if (_interactableWorker)
+                    if (collision.gameObject == _interactableWorker.gameObject)
+                        _interactableWorker = null;
+                break;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (_interactableWorker)
-            if (collision.transform.parent == _interactableWorker.transform)
-            {
-                _interactableWorker.Highlight(false);
-                _interactableWorker = null;
-            }
+            case "Dog":
+                if (_interactableWorker)
+                    if (collision.transform == _interactableWorker.transform)
+                    {
+                        _interactableWorker.Highlight(false);
+                        _interactableWorker = null;
+                    }
+                break;
+
+            case "PC":
+                if (_interactablePC)
+                    if (collision.gameObject == _interactablePC.gameObject)
+                        _interactablePC = null;
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void DirectMeeting()
@@ -147,24 +214,6 @@ public class PlayerControl : MonoBehaviour
                 //Enqueue dog
                 _dog.EnqueueDeslack(hit.transform);
             }
-=======
-        switch (collision.gameObject.tag)
-        {
-            case "Worker":
-                if (_interactableWorker)
-                    if (collision.gameObject == _interactableWorker.gameObject)
-                        _interactableWorker = null;
-                break;
-
-            case "PC":
-                if (_interactablePC)
-                    if (collision.gameObject == _interactablePC.gameObject)
-                        _interactablePC = null;
-                break;
-
-            default:
-                break;
->>>>>>> PC
         }
     }
 }

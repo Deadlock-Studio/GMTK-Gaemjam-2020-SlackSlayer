@@ -19,9 +19,6 @@ public class PlayerControl : MonoBehaviour
     private Vector2 _look;
     private Inventory.Item _selectedItem;
 
-
-
-
     [SerializeField]
     private DogControl _dog = null;
 	
@@ -88,7 +85,7 @@ public class PlayerControl : MonoBehaviour
 	//Right click to queue for dog to deslack
         if (Input.GetMouseButtonDown(1))
         {
-            DogEnqueue();
+            if (_dog) DogEnqueue();
         }
 
 

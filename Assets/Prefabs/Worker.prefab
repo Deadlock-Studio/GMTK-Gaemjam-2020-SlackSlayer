@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290356384}
   - component: {fileID: 290356383}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5597636889522075724}
   - component: {fileID: 5597636889522075715}
   - component: {fileID: 5597636889522075719}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Worker
   m_TagString: Worker
   m_Icon: {fileID: 0}
