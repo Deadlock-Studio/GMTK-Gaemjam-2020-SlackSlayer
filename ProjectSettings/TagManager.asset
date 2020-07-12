@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Worker
   - PC
+  - Throwable
+  - Environment
   - Dog
   layers:
   - Default
@@ -17,9 +19,11 @@ TagManager:
   - 
   - 
   - CameraConfiner
+  - Throwable
   - Dog
   - Worker
   - Player
+  - SceneObject
   - 
   - 
   - 

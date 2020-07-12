@@ -1405,7 +1405,7 @@ TextureImporter:
     second: colored_transparent_466
   - first:
       213: -6139786927565193575
-    second: colored_transparent_467
+    second: crosshair
   - first:
       213: 3330174146073337408
     second: colored_transparent_468
@@ -21789,7 +21789,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: colored_transparent_467
+      name: crosshair
       rect:
         serializedVersion: 2
         x: 320
