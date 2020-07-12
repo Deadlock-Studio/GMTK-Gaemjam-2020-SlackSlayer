@@ -8,8 +8,26 @@ public class ThrowableScript : MonoBehaviour
 
     [SerializeField]
     private WorkerControl _interactableWorker = null;
-
+    private Rigidbody2D _rb = null;
+    private int bounds;
     public GameObject throwablePickupPrefab;
+    public int numberOfBound;
+
+
+
+    private void Start()
+    {
+        bounds = 0;
+        _rb = GetComponent<Rigidbody2D>();
+    }
+    private void Update()
+    {
+        if (bounds >= numberOfBound)
+        {
+            Instantiate(throwablePickupPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,13 +39,11 @@ public class ThrowableScript : MonoBehaviour
                 if (_interactableWorker != null)
                     if (_interactableWorker.IsSlacking())
                         _interactableWorker.Deslack();
-                Instantiate(throwablePickupPrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                bounds++;
                 break;
 
             case "Environment":
-                Instantiate(throwablePickupPrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                bounds++;
                 break;
 
             default:
