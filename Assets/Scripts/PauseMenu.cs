@@ -40,6 +40,18 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
+    public void Freeze()
+    {
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
+    public void Unfreeze()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
+
     public void SkipLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
