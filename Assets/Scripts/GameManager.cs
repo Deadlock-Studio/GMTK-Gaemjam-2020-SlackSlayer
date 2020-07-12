@@ -9,15 +9,21 @@ public class GameManager : MonoBehaviour
     public PlayerControl player;
 
     [SerializeField]
-    private static float _workProgress = 0;
+    private float _workProgress = 0;
     public float clearProgress = 0;
-    public float waveNumber = 0;
+    public int waveNumber = 0;
+    public int waveAffect = 0;
+    private int _waveCount = 0;
 
-    public float waveDuration = 10;
     private float _preGame = 5;
+
     private float _lastTime = 0;
     private float _currentTime = 0;
-    private float _interval = 1.5f;
+    public float interval = 1.5f;
+
+    private float _lastWaveTime = 0;
+    public float waveDuration = 10;
+
     [SerializeField]
     private float _gameTime = 0;
 
@@ -33,15 +39,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //Pregame screen
+        _currentTime += Time.deltaTime;
 
-        if (_currentTime >= _preGame)
+        //Wave
+        player.SetControl(true);
+        if (_waveCount == 0 || _currentTime - _lastWaveTime >= waveDuration)
         {
-            player.SetControl(true);
+            if (_waveCount < waveNumber)
+            {
+                Wave(waveAffect);
+                IncreaseWave();
+                //TODO Announce next wave
+                _lastWaveTime = _currentTime;
+            }
         }
 
-        _currentTime += Time.deltaTime;
-        if (_currentTime - _lastTime >= _interval)
+        if (_currentTime - _lastTime >= interval)
         {
             Produce();
             _lastTime = _currentTime;
@@ -64,6 +77,16 @@ public class GameManager : MonoBehaviour
         }   
     }
 
+    private void IncreaseWave()
+    {
+        int nextWave = waveAffect * 2;
+        if (nextWave > workerList.Length)
+        {
+            waveAffect = workerList.Length;
+        }
+        else waveAffect = nextWave;
+    }
+
     // i is the amount of slackers
     private void Wave(int i)
     {
@@ -84,9 +107,10 @@ public class GameManager : MonoBehaviour
                 workerList[target[j]].GetComponent<WorkerControl>().Slack();
             }
         }
+        _waveCount++;
     }
 
-    public static void Work(float amount)
+    public void Work(float amount)
     {
         _workProgress += amount;
     }
