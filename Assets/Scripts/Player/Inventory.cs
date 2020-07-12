@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     //set public for debug purpose will change later
     public int _throwables = 0;
     public int _ghosts = 0;
-    public int _dummies = 0;
+    public int _dummies = 10;
     public int _usbs = 0;
 
     public enum Item {
@@ -60,22 +60,22 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public int GetThrowablesNumber()
+    public int GetThrowableNumber()
     {
         return _throwables;
     }
 
-    public int GetDummiesNumber()
+    public int GetDummyNumber()
     {
         return _dummies;
     }
 
-    public int GetGhostsNumber()
+    public int GetGhostNumber()
     {
         return _ghosts;
     }
 
-    public int GetUsbsNumber()
+    public int GetUsbNumber()
     {
         return _usbs;
     }

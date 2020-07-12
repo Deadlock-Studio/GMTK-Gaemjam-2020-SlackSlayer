@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject crosshair;
     public Camera cam;
     public GameObject throwablePrefab;
+    public GameObject DummyPrefab;
 
 
     void Awake()
@@ -72,11 +73,11 @@ public class PlayerControl : MonoBehaviour
 
         //select throwable by pressing 1
         if (Input.GetKeyDown(KeyCode.Alpha1)){
-            if (_inventory.GetThrowablesNumber() > 0)
+            if (_inventory.GetThrowableNumber() > 0)
             {
                 if (_selectedItem == Inventory.Item.THROWABLE)
                 {
-                    deselectConsumable(0);
+                    DeselectConsumable(0);
                 }
                 else
                 {
@@ -89,16 +90,33 @@ public class PlayerControl : MonoBehaviour
         //select usb by pressing 2
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_inventory.GetUsbsNumber() > 0)
+            if (_inventory.GetUsbNumber() > 0)
             {
                 if (_selectedItem == Inventory.Item.USB)
                 {
-                    deselectConsumable(1);
+                    DeselectConsumable(1);
                 }
                 else
                 {
                     GUIElements.ToggleActive(1, true);
                     _selectedItem = Inventory.Item.USB;
+                }
+            }
+        }
+
+        //select dummy by pressing 3
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (_inventory.GetDummyNumber() > 0)
+            {
+                if (_selectedItem == Inventory.Item.DUMMY)
+                {
+                    DeselectConsumable(2);
+                }
+                else
+                {
+                    GUIElements.ToggleActive(2, true);
+                    _selectedItem = Inventory.Item.DUMMY;
                 }
             }
         }
@@ -137,7 +155,7 @@ public class PlayerControl : MonoBehaviour
         _look = _mousePos - _rb.position;
     }
 
-    private void deselectConsumable(int i)
+    private void DeselectConsumable(int i)
     {
         GUIElements.ToggleActive(i, false);
         _selectedItem = Inventory.Item.NOTHING;
@@ -150,11 +168,17 @@ public class PlayerControl : MonoBehaviour
     private void UseItem(Inventory.Item item) {
         switch (item) {
             case Inventory.Item.GHOST:
+
                 break;
             case Inventory.Item.DUMMY:
+                _inventory.DecreaseItemInInventory(Inventory.Item.DUMMY);
+                GameObject dummy = Instantiate(DummyPrefab, transform.position, Quaternion.identity);
+                _selectedItem = Inventory.Item.NOTHING;
+                GUIElements.ToggleActive(2, false);
+
                 break;
             case Inventory.Item.THROWABLE:
-                if (_inventory.GetThrowablesNumber() > 0)
+                if (_inventory.GetThrowableNumber() > 0)
                 {
                     _inventory.DecreaseItemInInventory(Inventory.Item.THROWABLE);
                     GameObject throwable = Instantiate(throwablePrefab, transform.position, Quaternion.identity);

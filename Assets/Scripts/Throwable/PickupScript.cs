@@ -10,7 +10,8 @@ public class PickupScript : MonoBehaviour
     {
         _inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
-        switch (gameObject.tag) {
+        switch (gameObject.tag)
+        {
             case "Throwable":
                 item = Inventory.Item.THROWABLE;
                 break;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GUIElements : MonoBehaviour
 {
-    public const int MAX_ITEMTYPE = 2;
+    public const int MAX_ITEMTYPE = 3;
     private static Image[] icon = new Image[MAX_ITEMTYPE];
     private static Image[] iconA = new Image[MAX_ITEMTYPE];
 
@@ -13,6 +13,8 @@ public class GUIElements : MonoBehaviour
     public Image ThrowablesA;
     public Image USB;
     public Image USBA;
+    public Image Dummy;
+    public Image DummyA;
 
     public Inventory inventory;
 
@@ -22,6 +24,8 @@ public class GUIElements : MonoBehaviour
         if (ThrowablesA) iconA[0] = ThrowablesA;
         if (USB) icon[1] = USB;
         if (USBA) iconA[1] = USBA;
+        if (Dummy) icon[2] = Dummy;
+        if (DummyA) iconA[2] = DummyA;
     }
 
     private void Update()
@@ -31,14 +35,19 @@ public class GUIElements : MonoBehaviour
 
     private void InventoryUpdate()
     {
-        if (inventory._throwables > 0) ToggleIcon(0, true);
+        if (inventory.GetThrowableNumber() > 0) ToggleIcon(0, true);
         else ToggleIcon(0, false);
-        if (inventory._usbs > 0) ToggleIcon(1, true);
+
+        if (inventory.GetUsbNumber() > 0) ToggleIcon(1, true);
         else ToggleIcon(1, false);
+
+        if (inventory.GetDummyNumber() > 0) ToggleIcon(2, true);
+        else ToggleIcon(2, false);
     }
 
     //0 throwables
     //1 usb
+    //2 dummy
     public static void ToggleIcon(int i, bool active = true)
     {
         icon[i].gameObject.SetActive(active);
