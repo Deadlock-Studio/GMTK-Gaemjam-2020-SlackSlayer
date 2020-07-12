@@ -9,6 +9,8 @@ TagManager:
   - Throwable
   - Environment
   - Dog
+  - Dummy
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -24,10 +26,8 @@ TagManager:
   - Worker
   - Player
   - SceneObject
-  - 
-  - 
-  - 
-  - 
+  - PlayerTrigger
+  - Pickup
   - 
   - 
   - 

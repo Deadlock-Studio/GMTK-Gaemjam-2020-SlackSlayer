@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5235391173703972438}
   - component: {fileID: 5235391173703972437}
   - component: {fileID: 5235391173703972436}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ThrowablePickup
   m_TagString: Throwable
   m_Icon: {fileID: 0}
