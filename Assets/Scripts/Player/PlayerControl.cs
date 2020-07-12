@@ -15,7 +15,7 @@ using Vector3 = UnityEngine.Vector3;
 [RequireComponent(typeof(UnitMovement))]
 public class PlayerControl : MonoBehaviour
 {
-    private bool _control = false;
+    private bool _control = true;
 
     private float _moveX;
     private float _moveY;
