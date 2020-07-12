@@ -19,11 +19,6 @@ public class DogControl : MonoBehaviour
         _slack = GetComponent<WorkerControl>();
     }
 
-    private void Start()
-    {
-        _slack.Deslack();
-    }
-
     // Update is called once per frame
     void Update()
     {
