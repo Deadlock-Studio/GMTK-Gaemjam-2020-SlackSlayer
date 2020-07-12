@@ -27,13 +27,11 @@ public class DummyScript : MonoBehaviour
         //    if (_interactableWorker.IsSlacking())
         //        _interactableWorker.Deslack();
 
-
         //check the active timer
         if (_activeTimer <= 0) {
             _anim.SetTrigger("deactivate");
             //destroy object after done playing animation
             Destroy(gameObject, _anim.GetCurrentAnimatorStateInfo(0).length);
-            
         }  
     }
 
@@ -50,8 +48,18 @@ public class DummyScript : MonoBehaviour
             if (_interactableWorker != null)
                 if (_interactableWorker.IsSlacking())
                     _interactableWorker.Deslack();
-
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Worker")
+        {
+            _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
+
+        }
+    }
 }
