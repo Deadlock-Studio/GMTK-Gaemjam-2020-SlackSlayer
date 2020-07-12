@@ -7,11 +7,14 @@ using UnityEngine.XR.WSA.Input;
 public class WorkerControl : MonoBehaviour
 {
     private bool _isSlacking = true;
+    private bool _isHacked = false;
     private bool _slackable = true;
 
     //GameObjects
     [SerializeField]
     private GameObject _border = null;
+    [SerializeField]
+    private GameObject _hacked = null;
 
     //Components
     private Animator _anim;
@@ -19,6 +22,11 @@ public class WorkerControl : MonoBehaviour
     public bool IsSlacking()
     {
         return _isSlacking;
+    }
+
+    public bool IsHacked()
+    {
+        return _isHacked;
     }
 
     public bool Slackable {
@@ -53,5 +61,17 @@ public class WorkerControl : MonoBehaviour
     public void Highlight(bool active)
     {
         _border.SetActive(active);
+    }
+
+    public void Hack()
+    {
+        _isHacked = true;
+        _hacked.SetActive(true);
+    }
+
+    public void Unhack()
+    {
+        _isHacked = false;
+        _hacked.SetActive(false);
     }
 }

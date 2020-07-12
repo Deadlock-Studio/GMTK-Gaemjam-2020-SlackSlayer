@@ -11,6 +11,7 @@ TagManager:
   - Dog
   - Dummy
   - Ghost
+  - LevelArea
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - SceneObject
   - PlayerTrigger
   - Pickup
-  - 
+  - LevelArea
   - 
   - 
   - 

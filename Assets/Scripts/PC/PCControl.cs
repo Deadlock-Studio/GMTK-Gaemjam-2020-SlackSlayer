@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class PCControl : MonoBehaviour
 {
-    private bool _isHacked = false;
+    List<WorkerControl> _hackList = new List<WorkerControl>();
+
+    //Component
     private Animator _anim;
 
-    public bool IsHacked()
-    {
-        return _isHacked;
-    }
     void Awake()
     {
         _anim = GetComponent<Animator>();
-        _anim.SetBool("isHacked", _isHacked);
     }
 
-    public void Hacked() {
-        _isHacked = true;
-        _anim.SetBool("isHacked", true);
+    public void InitiateHacking()
+    {
+        foreach (WorkerControl worker in _hackList)
+        {
+            worker.Deslack();
+        }
+    }
+
+    public void AddToHackList(WorkerControl worker)
+    {
+        _hackList.Add(worker);
+        worker.Hack();
     }
 }

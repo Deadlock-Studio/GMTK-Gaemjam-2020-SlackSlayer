@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3009889152210957420}
   - component: {fileID: 3009889152210957422}
   - component: {fileID: 3009889152210957421}
-  - component: {fileID: 3009889152210957423}
   - component: {fileID: 3009889152210957392}
   m_Layer: 12
   m_Name: Player
@@ -137,9 +136,14 @@ MonoBehaviour:
   _dog: {fileID: 0}
   _interactableWorker: {fileID: 0}
   _interactablePC: {fileID: 0}
+  _nearPC: 0
   crosshair: {fileID: 3009889152554305379}
   cam: {fileID: 0}
   throwablePrefab: {fileID: 934421265244238108, guid: d8691cd42682d0e4f941ca3f2258d386,
+    type: 3}
+  DummyPrefab: {fileID: 7418944355319698916, guid: 4dee51b94de56d84db73046ee33eb2af,
+    type: 3}
+  GhostPrefab: {fileID: 5055913924803272389, guid: f93f6516c7a3d7a43bef24f30ea63cb3,
     type: 3}
 --- !u!50 &3009889152210957422
 Rigidbody2D:
@@ -188,22 +192,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.84210527, y: 1.0526316}
   m_EdgeRadius: 0
---- !u!58 &3009889152210957423
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3009889152210957415}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.7
 --- !u!114 &3009889152210957392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,10 +204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef80255d0ba2984fb23460dbbb9df38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwables: 0
+  _throwables: 100
   _ghosts: 0
-  _dummies: 0
-  _usbs: 0
+  _dummies: 100
+  _usbs: 2
 --- !u!1 &3009889152554305379
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,9 +300,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3009889153079601104}
   - component: {fileID: 3009889153079601105}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PlayerTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
