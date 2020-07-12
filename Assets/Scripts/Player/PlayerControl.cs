@@ -76,8 +76,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (_selectedItem == Inventory.Item.THROWABLE)
                 {
-                    GUIElements.ToggleActive(0, false);
-                    _selectedItem = Inventory.Item.NOTHING;
+                    deselectConsumable(0);
                 }
                 else
                 {
@@ -90,15 +89,17 @@ public class PlayerControl : MonoBehaviour
         //select usb by pressing 2
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_selectedItem == Inventory.Item.USB)
+            if (_inventory.GetUsbsNumber() > 0)
             {
-                GUIElements.ToggleActive(1, false);
-                _selectedItem = Inventory.Item.NOTHING;
-            }
-            else
-            {
-                GUIElements.ToggleActive(1, true);
-                _selectedItem = Inventory.Item.USB;
+                if (_selectedItem == Inventory.Item.USB)
+                {
+                    deselectConsumable(1);
+                }
+                else
+                {
+                    GUIElements.ToggleActive(1, true);
+                    _selectedItem = Inventory.Item.USB;
+                }
             }
         }
 
@@ -134,6 +135,12 @@ public class PlayerControl : MonoBehaviour
     {
         _move.Walk(_moveX, _moveY);
         _look = _mousePos - _rb.position;
+    }
+
+    private void deselectConsumable(int i)
+    {
+        GUIElements.ToggleActive(i, false);
+        _selectedItem = Inventory.Item.NOTHING;
     }
 
     private void MoveCrosshair() {
