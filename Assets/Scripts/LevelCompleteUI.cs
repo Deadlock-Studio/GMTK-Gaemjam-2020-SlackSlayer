@@ -41,8 +41,11 @@ public class LevelCompleteUI : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
         {
-            skipLevelButton.SetActive(true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            skipLevelButton.SetActive(false);
         }
 
     }
