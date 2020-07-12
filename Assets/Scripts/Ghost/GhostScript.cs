@@ -66,6 +66,19 @@ public class GhostScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Worker"))
+        {
+            _interactableWorker = collision.gameObject.GetComponent<WorkerControl>();
+            //if on dummy trigger zone then no slack
+            if (_interactableWorker != null)
+                if (_interactableWorker.IsSlacking())
+                    _interactableWorker.Deslack();
+
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
