@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            slackTime.text = "Final wave";
+            slackTime.text = "Time left: " + _gameTime.ToString("0");
             slackCount.text = "";
         }
 
