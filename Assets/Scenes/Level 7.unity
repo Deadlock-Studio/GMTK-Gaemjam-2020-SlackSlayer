@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565b1a95aa0a1e340b8e0e9b43d535d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pause: {fileID: 1936899577}
+  pause: {fileID: 1935827480}
 --- !u!1001 &350087500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1498,6 +1498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3599877956658776596, guid: 8df31be88385d854e9aae2dcc07b6fba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5815823012443541161, guid: 8df31be88385d854e9aae2dcc07b6fba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2748,11 +2753,12 @@ MonoBehaviour:
   slackCount: {fileID: 859095258}
   progressBar: {fileID: 572385537}
   _workProgress: 0
-  clearProgress: 215
-  waveNumber: 3
-  waveAffect: 3
+  clearProgress: 250
+  waveNumber: 4
+  waveAffect: 4
   interval: 1.5
   waveDuration: 7
+  lvlUI: {fileID: 0}
   _gameTime: 0
 --- !u!4 &1189867923
 Transform:
@@ -4622,9 +4628,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1936899577 stripped
+--- !u!114 &1935827480 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5815823012443541162, guid: 8df31be88385d854e9aae2dcc07b6fba,
+  m_CorrespondingSourceObject: {fileID: 3599877956658776599, guid: 8df31be88385d854e9aae2dcc07b6fba,
     type: 3}
   m_PrefabInstance: {fileID: 609841498}
   m_PrefabAsset: {fileID: 0}
